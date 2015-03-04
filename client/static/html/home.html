@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+    </head>
+    <body>
+        <div class='test'></div>
+        <script type="text/javascript">
+
+            var localPublicKey = '{"alg":"RSA-OAEP-256","e":"AQAB","ext":true,"key_ops":["encrypt"],"kty":"RSA","n":"uN-a-oXPHByDE0qguXfTZySYkRNVq1m97nr_i-pZYh_cueTALOL7MLx_r7Gox9gM7JJ9OHEZG25RZFUlh9NgF6GTKxxoFlu4cUvUXUQFWXQGgcjkMfV7_JAbWqsoFfv3N0XUtZoTfirOwW898lUAD72-ZA3YWeyDQxxQ2vm3tz4UTP54wzlFWoUS5HEsnAm95LZgWRyR9DjY_EUQ1FulW35wP_kpPqUzmV7CEoE1n7u4OfKvP918H7pwunbQSE6mOiv4v_3rt549HE0Rb1OsUbCIjC7H4i9D1D_uBZnL0AMpLIXDFVbSGHGjrVy4R0iroqvWgw-W0qSQxIluRYPw2w"}';
+            var localPrivateKey = '{"alg":"RSA-OAEP-256","d":"I3nFI43J0HsoK-uGLBDyYDiFjlFHfzoZWEoB_7dYr5utn35l4jcsPI3vcqeE29R5pmv1237YcosY00gDi6zkI6S9uOgakS_IlPUYK02COUgqd301TODuieidVyjA6HcRWWntB2wpkWxlgHj4SihFer_OaSS-_4KDLb2hRmPk_SR458puJ_x4APNqdi_HTZG_nXXqM7L7QHFMBDRaX6SO7_f07zGwym_jVT3ZdwG6jkE2gH2q-60BANXHFfN0fwmYT9wMyaRGeIBmknQY9GPNhansWz3exl7FA7sLjkfrjTdQQfrBjK22teY21SvxZxj7KWPa7UzSwe3zLaC5e3d_AQ","dp":"En8yWcNtvQ8PuA9Onj2SM2sci2iXB5Xnb3ZR5U-ZG6u7MJak952MTrguvPmPHRO1pYxuLqx-oG-cYWbEjX8WEc3VzpNgJuCn4Za6wPCD5M5DgPG4E6W3ThRxpfR8_GN_8KCXGTEiQnqec4Fw7URqzfelrjOANAhFHFUB9Cnn0lE","dq":"HTIep7uDp04ZBXmi4J2MCHp6GXUXE-ZUPJF0tJGwsprqj6vxcY7cgW0dOFIWhMMpkRpAzYnVneq-c8dxFJCk9kbDg8uPmVAK6EIHjniUkWVl-flDgAIwPj6Yhtdikd1O3LbTpewp04QDUJfhylTx5PEoN6_o9SPUxsmaWUNNeIM","e":"AQAB","ext":true,"key_ops":["decrypt"],"kty":"RSA","n":"uN-a-oXPHByDE0qguXfTZySYkRNVq1m97nr_i-pZYh_cueTALOL7MLx_r7Gox9gM7JJ9OHEZG25RZFUlh9NgF6GTKxxoFlu4cUvUXUQFWXQGgcjkMfV7_JAbWqsoFfv3N0XUtZoTfirOwW898lUAD72-ZA3YWeyDQxxQ2vm3tz4UTP54wzlFWoUS5HEsnAm95LZgWRyR9DjY_EUQ1FulW35wP_kpPqUzmV7CEoE1n7u4OfKvP918H7pwunbQSE6mOiv4v_3rt549HE0Rb1OsUbCIjC7H4i9D1D_uBZnL0AMpLIXDFVbSGHGjrVy4R0iroqvWgw-W0qSQxIluRYPw2w","p":"5LjwyHEyEHYWXp_peC8p-U0WiKcMkSTa-FtCchCKG6tR73kF58cAA07mKoUf0DiMVFa8uHMFdGtFBiQ5ZTkrINc25ArCFtZmgiefxEN4PShlM9az8TWpPW2JGZtJp4jOi4V-QCf3rGIxwcgvFIt_00tVfK0JcdJ1TlnzsPioS2U","q":"zuvsrAmBq3_ia8RSV1RDKeaoJ586sPGirBRM6J4PH75dQhjkRhsh-h7NoD9Pc2iS9R1tGXW4LdsUMlPohgqeKQVkidgP3Bxa7LrPl-jUOttM6xO5fqYPPRFhL2ve7Hqblp-jxoV9Cu5VHpG-Hc8deySMVEaO7-_inbPJtOjZJz8","qi":"JAJCF9ewZLDBRIdTzQhmuf1Mh4GhKdZtpezOUvzMUawMGxFYi9nVwedgW_TIVBbHM2ShetzIgyz6qtXysB4ec4nAz16Xdv19Ve-UU0GFIKFeyYT8CYps9QbbVFWyM6QRGNftmskSh8HGeVhiJQEGbg8kAApTBIgmPqvLbcmqv1A"}';
+            var serverPublicKey = '{"alg":"RSA-OAEP-256","e":"AQAB","ext":true,"key_ops":["encrypt"],"kty":"RSA","n":"rA-KE3OkjqJw3JZuir_MLjwOsUkwiHVN6tk-08cs6m4-5nK4PPHIIzXMvemLI6c0AscscE5h8iRQUkWYdLPewDXCVdjEEunGTRL7OE8a9YJYLx_74g19JtbRXBKsdnqqTHzOPJ45_4z3T_z4kgMJKs03fmaN6lgKcdmcOkBjkWXWInebun3EHmnKpVFViFomYfmp5BMSUvYvWSYVczi_tuMequ3nKEsdw0gVjr-CLIiz6kefTUFYDpmgRYJkDOzy6l3I7UnMIoQm6VdaGiPZ1VrQFfjz6kAjwDlsWDWkFEH7qKNIejNcBhBozknuFQSk5eqYDVEfVfJcA1QRgrJeCw"}';
+            var serverPrivateKey = '{"alg":"RSA-OAEP-256","d":"HEnlwrL1sDnG4o2dGRTVphhbtgw5fYYDzIPxT3Jk0RpVHyBnaCW8aQWUZvj51l_MLlS-2qwYcG5GAnDM0wsrqWBtVh3whseGwe9H_IcNAKZwhzbz-8OJ-xPAkinDzyr1yuOOKOs-z-RGWRFXcPIs1Kuu3wpPdOMKvJMxm2YwuJvHpO5qpEe1XXHAVL2-zLhia5MD2oY8rre5xgSMeMFPEoVto4YNUcBVUBSzDSqJdtyliusjfdmqyo_m-J8RgkZ9T-4ksa_MPu4hdQ4Jjgor3SSa9cxWmh4_fDREK_HZ9tns1uEhZB5pIzbvIQl3r8fB5Yn9e00V9H13AFJvM-KT0Q","dp":"ms-8wunWrYdEFNtF9w2HjMznviBg1i5rO05UnhrKcCf6ttoxLdJTleVwA5hqILjb8L3mCveSAoBEMcYlN3SCYx1Z4f94t7M8moY30H2b9iydManHxie3DPXmRuiIjhGDdCthPAP8ZbeUXja_wPvApO1IYl0jLbD6dF31GtgXaMM","dq":"ZNrXVjF1lJ5RuYv425rFd8XST305Bed4XnPPNSjMwS8FvzNgzqIrrx67AUgXPd9rt3g_RJTBIjXgDZTMwqCLGcQSZpqBjTjdtA7owxhrY-A-Dq5P2K5wup8UP9Ltq98Qf4cMBeS8KGHAZyFoQAbeb3gQvTv2ccu994IcsVzGwcE","e":"AQAB","ext":true,"key_ops":["decrypt"],"kty":"RSA","n":"rA-KE3OkjqJw3JZuir_MLjwOsUkwiHVN6tk-08cs6m4-5nK4PPHIIzXMvemLI6c0AscscE5h8iRQUkWYdLPewDXCVdjEEunGTRL7OE8a9YJYLx_74g19JtbRXBKsdnqqTHzOPJ45_4z3T_z4kgMJKs03fmaN6lgKcdmcOkBjkWXWInebun3EHmnKpVFViFomYfmp5BMSUvYvWSYVczi_tuMequ3nKEsdw0gVjr-CLIiz6kefTUFYDpmgRYJkDOzy6l3I7UnMIoQm6VdaGiPZ1VrQFfjz6kAjwDlsWDWkFEH7qKNIejNcBhBozknuFQSk5eqYDVEfVfJcA1QRgrJeCw","p":"1l6De_MBaIcPLDm3yBGandMel9n1bFIooWlRMi-4fPAmra-n2xu6fEVJwa4xkBrlmMZZrJeK1PDdNx0UFM0jikc9wBslXa1iqc1UsRMwH0nYTMIaNh6AjXtFatjoGeM4yWw--n6wyM00fiHAa_tFQ-XqEfoMNQIuO2zGxbQU1wM","q":"zXmijAHgV8MvnvR-4eo8HudxDInXJsbAMLzQYr7imiozrrUxW2JRgJ_BGSwwLcPZN_5l96DNL73OParFKxSLw8P_EPlhR3PEgv9GPUGAAJoWJalGiJzyguUwDxUNrbfGLidv9rX5GeUz9VGNB_OCX84Wc9ht3od6lRsXZJqEilk","qi":"Tr75QfiyYCWwm4ABrBqZDPbcIXvuFVfb734v95T4azLGpjDSl52VvNysOBLgsfcB0JiBNUGUUxWJ4TU4yEZwms9mwtuIcW5xIYQ4AdVaLwn5QxnS4ikU_MbqnJxw_d1zrk2C5Tdi_DTDun10yOdaGYkdr0FKYUdL6c87glHsN6Q"}';
+
+            function post(url, data){
+                return new Promise(function(resolve, reject){
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange = function(){
+                        if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                            resolve(JSON.parse(decrypt(xmlHttp.responseText, localPrivateKey)));
+                        }else{
+                            reject();
+                        }
+                    }
+                    xmlHttp.open('POST', url, true);
+                    xmlHttp.send(encrypt(data, JSON.parse(serverPublicKey) ));
+                })
+            }
+
+            function encrypt(data, keyJSON){
+                var data = new TextEncoder("UTF-8").encode(data);
+                var randomsKeys = geneRandomHexStr(64); // 128 bit keys
+                var encryptedKey = hexStringToUint8Array(randomsKeys);
+                var aesAlgo = {name: 'aes-cbc', iv: hexStringToUint8Array("000102030405060708090a0b0c0d0e0f")};
+                return crypto.subtle.importKey("jwk", keyJSON, {name: "rsa-oaep", hash: {name: "sha-256"}},true, ['encrypt'])
+                    .then(function(publicKey){
+                        return crypto.subtle.encrypt({name: "rsa-oaep"}, publicKey, encryptedKey);
+                    }).then(function(res){
+                        encryptedKey = bytesToHexString(res)
+                        // use aes to encrypt data
+                        // import aes key
+                        return crypto.subtle.importKey('raw', 
+                            hexStringToUint8Array(randomsKeys) , aesAlgo, false, ['encrypt', 'decrypt']);
+                        
+                    }).then(function(result){
+                        // use aes to encode
+                        return crypto.subtle.encrypt(aesAlgo,
+                         result, data);
+                    }).then(function(encryptedData){
+                        return Promise.resolve({
+                            'encrypted': bytesToHexString(encryptedData),
+                            'encryptedKey': encryptedKey,
+                        });
+                    });
+
+                //console.log(new TextDecoder("UTF-8").decode(data));
+                // use server public key to encrypt
+                
+            }
+
+            function decrypt(data, keyJSON){
+                // use local private key to decrypt
+                var encryptedKey = new hexStringToUint8Array(data.encryptedKey);
+                var encryptedData = new hexStringToUint8Array(data.encrypted);
+                var aesAlgo = {name: 'aes-cbc', iv: hexStringToUint8Array("000102030405060708090a0b0c0d0e0f")};
+                // decrypt key
+                return crypto.subtle.importKey('jwk', keyJSON, {name: "rsa-oaep", hash: {name: "sha-256"}}, true,
+                    ['decrypt']).then(function(privateKey){
+                        return crypto.subtle.decrypt({name: 'rsa-oaep'}, privateKey, encryptedKey);
+                    }).then(function(decryptedKey){
+                        // import aes key
+                        return crypto.subtle.importKey('raw', 
+                            decryptedKey, aesAlgo, false, ['encrypt', 'decrypt']);
+                    }).catch(function(){
+                        console.error("decrypt error");
+                    }).then(function(result){
+                        // decode encrypted data
+                        return crypto.subtle.decrypt(aesAlgo, result, encryptedData);
+                    }).then(function(data){
+                        return Promise.resolve(new TextDecoder("UTF-8").decode(new Uint8Array(data)));
+                    })
+
+            }
+
+            function createNewUserKey(){
+                var algorithmKeyGen = {
+                    name: "RSA-OAEP",
+                    hash: {name: "sha-256"},
+                    // RsaKeyGenParams
+                    modulusLength: 2048,
+                    publicExponent: new Uint8Array([0x01, 0x00, 0x01]),  // Equivalent to 65537
+                };
+                var nonExtractable = false;
+                
+                var publicKey = "";
+                var privateKey = "";
+                var keyPairs = "";
+                return crypto.subtle.generateKey(algorithmKeyGen, true, ['encrypt', 'decrypt']).then(function(result) {
+                    // gene key pair
+                    keyPairs = result;
+                    return Promise.all([crypto.subtle.exportKey("jwk", keyPairs.publicKey),
+                        crypto.subtle.exportKey("jwk", keyPairs.privateKey)]);
+                })
+                
+            }
+
+            function _arrayBufferToBase64( buffer ) {
+                var binary = '';
+                var bytes = new Uint8Array( buffer );
+                var len = bytes.byteLength;
+                for (var i = 0; i < len; i++) {
+                    binary += String.fromCharCode( bytes[ i ] );
+                }
+                return window.btoa( binary );
+            }
+
+            function hexStringToUint8Array(hexString) {
+                if (hexString.length % 2 != 0)
+                    throw "Invalid hexString";
+                var arrayBuffer = new Uint8Array(hexString.length / 2);
+                for (var i = 0; i < hexString.length; i += 2) {
+                    var byteValue = parseInt(hexString.substr(i, 2), 16);
+                    if (byteValue == NaN)
+                        throw "Invalid hexString";
+                    arrayBuffer[i/2] = byteValue;
+                }
+                return arrayBuffer;
+            }
+
+            function bytesToHexString(bytes) {
+                if (!bytes)
+                    return null;
+                bytes = new Uint8Array(bytes);
+                var hexBytes = [];
+                for (var i = 0; i < bytes.length; ++i) {
+                    var byteString = bytes[i].toString(16);
+                    if (byteString.length < 2)
+                        byteString = "0" + byteString;
+                    hexBytes.push(byteString);
+                }
+                return hexBytes.join("");
+            }
+
+            function geneRandomHexStr(length){
+                var text = "";
+                var possible = "0123456789abcdef";
+
+                for( var i=0; i < length; i++ )
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
+
+            createNewUserKey().then(function(keyPairs){
+                encrypt("this is origin text", keyPairs[0]).then(function(res){
+                    console.log('public', JSON.stringify(keyPairs[0]));
+                    console.log('private', JSON.stringify(keyPairs[1]));
+                    decrypt(res, keyPairs[1]).then(function(decrypted){
+                        console.log('decrypted', decrypted);
+                    });
+                });
+            })
+
+        </script>
+    </body>
+</html>
