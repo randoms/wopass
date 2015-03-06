@@ -13,16 +13,17 @@ maxDataSize 10M
 var dburi = 'mongodb://localhost:27017/wopass';
 var maxDataSize = 10*1024*1024;
 
+/*
 new Promise(function(resolve, reject){
     MongoClient.connect(dburi, function(err, db){
         if(err)console.log(err);
         coll = db.collection('wopass');
         
-        /*var testRec = new record(coll, "Randoms", "jdklsakldsa");
+        var testRec = new record(coll, "Randoms", "jdklsakldsa");
         testRec.save();
         record.find(coll, "Randoms", function(res){
             console.log(res.toJSON());
-        })*/
+        })
 
         resolve(coll);
     })  
@@ -65,6 +66,9 @@ new Promise(function(resolve, reject){
     })
     server.listen(9999);
 })
+*/
+
+
 
 function updateRecord(data){
     return new Promise(function(resolve, reject){
@@ -89,11 +93,46 @@ function updateRecord(data){
 
         // try to decrypt data
 
-        
     })
 }
 
+encrypt("this is a test", serverKeys.privateKey);
+
 function encrypt(data, keyJSON){
+    var data = new Buffer(data);
+    var randomsKeys = geneRandomHexStr(64); // 128 bit keys
+    var encryptedKey = new Buffer(randomsKeys, 'hex');
+    var cipheriv = crypto.createCipheriv('aes-256-cbc', encryptedKey, new Buffer("000102030405060708090a0b0c0d0e0f","hex"));
+    cipheriv.update(data);
+    var encryptedData = cipheriv.final('hex');
+    encryptedKey = crypto.publicEncrypt(keyJSON, encryptedKey);
+    console.log(encryptedKey)
+    return;
+
+
+    return crypto.subtle.importKey("jwk", keyJSON, {name: "rsa-oaep", hash: {name: "sha-256"}},true, ['encrypt'])
+        .then(function(publicKey){
+            return crypto.subtle.encrypt({name: "rsa-oaep"}, publicKey, encryptedKey);
+        }).then(function(res){
+            encryptedKey = bytesToHexString(res)
+            // use aes to encrypt data
+            // import aes key
+            return crypto.subtle.importKey('raw', 
+                hexStringToUint8Array(randomsKeys) , aesAlgo, false, ['encrypt', 'decrypt']);
+            
+        }).then(function(result){
+            // use aes to encode
+            return crypto.subtle.encrypt(aesAlgo,
+             result, data);
+        }).then(function(encryptedData){
+            return Promise.resolve({
+                'encrypted': bytesToHexString(encryptedData),
+                'encryptedKey': encryptedKey,
+            });
+        });
+
+    //console.log(new TextDecoder("UTF-8").decode(data));
+    // use server public key to encrypt
 
 }
 
