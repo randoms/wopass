@@ -60,8 +60,8 @@
 
             function decrypt(data, keyJSON){
                 // use local private key to decrypt
-                var encryptedKey = new hexStringToUint8Array(data.encryptedKey);
-                var encryptedData = new hexStringToUint8Array(data.encrypted);
+                var encryptedKey = hexStringToUint8Array(data.encryptedKey);
+                var encryptedData = hexStringToUint8Array(data.encrypted);
                 var aesAlgo = {name: 'aes-cbc', iv: hexStringToUint8Array("000102030405060708090a0b0c0d0e0f")};
                 // decrypt key
                 return crypto.subtle.importKey('jwk', keyJSON, {name: "rsa-oaep", hash: {name: "sha-256"}}, true,
